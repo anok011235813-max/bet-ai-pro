@@ -70,17 +70,17 @@ export default function MobileConcept() {
             flex: 1;
         }
 
-        /* === GŁÓWNA KLASA KARTY (WSPÓLNA DLA WSZYSTKICH) === */
+        /* === GŁÓWNA KLASA KARTY === */
         .mobile-card {
             background: var(--card-bg);
-            border: 1px solid var(--card-border); /* Jednolity border wszędzie */
+            border: 1px solid var(--card-border);
             backdrop-filter: blur(30px);
             border-radius: 24px;
-            padding: 20px;
+            padding: 24px 20px; /* Nieco więcej paddingu góra/dół */
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* To kluczowe dla równych odstępów */
-            min-height: 150px;
+            justify-content: flex-start; /* WAŻNE: Układamy od góry */
+            min-height: 160px;
             position: relative;
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             transition: transform 0.2s;
@@ -101,7 +101,9 @@ export default function MobileConcept() {
             justify-content: center;
             align-items: center;
             color: var(--accent-magenta);
-            margin-bottom: 12px; /* Stały odstęp pod ikoną */
+            
+            margin-bottom: 20px; /* SZTYWNY ODSTĘP OD IKONY DO NAGŁÓWKA */
+            flex-shrink: 0; /* Ikona nigdy się nie zmniejszy */
         }
 
         /* Kolory ikon */
@@ -110,31 +112,35 @@ export default function MobileConcept() {
         .card-stats .icon-box { color: var(--accent-purple); border-color: rgba(139, 92, 246, 0.2); background: rgba(139, 92, 246, 0.1); }
         .card-yesterday .icon-box { color: #fbbf24; border-color: rgba(251, 191, 36, 0.2); background: rgba(251, 191, 36, 0.1); }
 
-        /* Wyszukiwarka (Duży) - nadpisujemy tylko rozmiar */
         .card-search {
             grid-column: span 2;
-            min-height: 160px;
-            /* Usunięty fioletowy border i gradient, teraz jest jak inne */
+            background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(217, 70, 239, 0.05));
         }
 
-        /* Work In Progress */
+        /* Work In Progress - wyjątek, układ poziomy */
         .card-wip {
             grid-column: span 2;
-            flex-direction: row;
+            flex-direction: row; 
             align-items: center;
-            justify-content: flex-start; /* Inny układ dla paska */
+            justify-content: flex-start;
             min-height: 80px;
             height: 80px;
             opacity: 0.5;
             border-style: dashed;
             gap: 16px;
+            padding: 0 20px;
         }
         
         .card-wip .icon-box {
-             margin-bottom: 0; /* Tutaj resetujemy margines */
+             margin-bottom: 0; /* Reset dla poziomego układu */
+        }
+        
+        /* TYPOGRAFIA */
+        .card-content {
+             display: flex;
+             flex-direction: column;
         }
 
-        /* TYPOGRAFIA */
         .card-content h2 {
             font-family: var(--font-heading);
             font-size: 1.2rem;
@@ -145,11 +151,11 @@ export default function MobileConcept() {
         }
 
         .search-desc {
-             display: block; /* Każde zdanie w nowej linii */
+             display: block;
              font-family: var(--font-body);
              font-size: 0.85rem;
              color: var(--text-muted);
-             margin-bottom: 4px; /* Odstęp między zdaniami */
+             margin-bottom: 4px;
              line-height: 1.4;
         }
 
@@ -159,7 +165,7 @@ export default function MobileConcept() {
             font-weight: 700;
             color: #fff;
             line-height: 1.2;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         
         .card-subtext {
@@ -169,11 +175,16 @@ export default function MobileConcept() {
             line-height: 1.3;
         }
         
-        /* Kontener dla treści w małych kafelkach */
-        .small-card-content {
-             margin-top: auto; /* Wypycha treść na sam dół */
+        .flex-row-content {
+           display: flex;
+           align-items: center;
+           gap: 16px;
         }
-
+        
+        .text-col {
+           display: flex;
+           flex-direction: column;
+        }
       `}</style>
 
       <div className="mobile-concept-wrapper">
@@ -186,7 +197,7 @@ export default function MobileConcept() {
         {/* BENTO GRID */}
         <div className="mobile-grid">
 
-          {/* 1. WYSZUKIWARKA HT/FT (Bez strzałki, bez fioletu, 2 linie opisu) */}
+          {/* 1. WYSZUKIWARKA HT/FT */}
           <div className="mobile-card card-search">
             <div className="icon-box"><Search size={22} /></div>
             <div className="card-content">
@@ -199,7 +210,7 @@ export default function MobileConcept() {
           {/* 2. NASZE WYBRANE TYPY */}
           <div className="mobile-card card-active">
             <div className="icon-box"><Flame size={22} /></div>
-            <div className="small-card-content">
+            <div className="card-content">
                 <div className="card-label">Nasze wybrane Typy</div>
                 <div className="card-subtext">Propozycje łamaków na najbliższe dni.</div>
             </div>
@@ -208,7 +219,7 @@ export default function MobileConcept() {
           {/* 3. TRAFIONE TYPY */}
           <div className="mobile-card card-history">
             <div className="icon-box"><History size={22} /></div>
-            <div className="small-card-content">
+            <div className="card-content">
                 <div className="card-label">Trafione Typy</div>
                 <div className="card-subtext">Sprawdź wszystkie nasze trafione typy.</div>
             </div>
@@ -217,7 +228,7 @@ export default function MobileConcept() {
           {/* 4. STATYSTYKI */}
           <div className="mobile-card card-stats">
             <div className="icon-box"><BarChart2 size={22} /></div>
-            <div className="small-card-content">
+            <div className="card-content">
                 <div className="card-label">Statystyki</div>
                 <div className="card-subtext">Zobacz naszą skuteczność i kluczowe wskaźniki.</div>
             </div>
@@ -226,7 +237,7 @@ export default function MobileConcept() {
           {/* 5. KTO WCZORAJ ZŁAMAŁ? */}
           <div className="mobile-card card-yesterday">
             <div className="icon-box"><CalendarDays size={22} /></div>
-             <div className="small-card-content">
+             <div className="card-content">
                 <div className="card-label">Kto wczoraj złamał?</div>
                 <div className="card-subtext">Wszystkie łamaki z dnia poprzedniego.</div>
             </div>
@@ -238,7 +249,7 @@ export default function MobileConcept() {
                   <Construction size={22} />
               </div>
               <div className="text-col">
-                <div className="card-label" style={{color: '#555'}}>Work in Progress</div>
+                <div className="card-label" style={{color: '#555', marginBottom: 0}}>Work in Progress</div>
               </div>
           </div>
 
