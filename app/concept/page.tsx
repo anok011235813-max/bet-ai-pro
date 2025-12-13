@@ -6,8 +6,8 @@ import {
   Flame, 
   History, 
   BarChart2, 
-  Crown, 
-  Tag,
+  CalendarDays, // Nowa ikona dla "Kto wczoraj złamał"
+  Construction, // Ikona dla Work in Progress
   ArrowUpRight
 } from 'lucide-react';
 
@@ -22,7 +22,6 @@ export default function MobileConcept() {
             --accent-magenta: #d946ef;
             --accent-purple: #8b5cf6;
             --accent-green: #4ade80;
-            --accent-glow: rgba(217, 70, 239, 0.4);
             --card-bg: rgba(255, 255, 255, 0.03);
             --card-border: rgba(255, 255, 255, 0.06);
         }
@@ -46,10 +45,18 @@ export default function MobileConcept() {
 
         .brand-logo {
             font-size: 1.5rem;
-            font-weight: 800;
-            color: #fff;
+            font-weight: 900;
             margin: 0;
             letter-spacing: -0.5px;
+            background: linear-gradient(90deg, #fff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase; /* WYMUSZENIE WIELKICH LITER */
+        }
+
+        .brand-logo .highlight {
+             color: var(--accent-magenta);
+             -webkit-text-fill-color: var(--accent-magenta);
         }
 
         .platform-badge {
@@ -73,7 +80,7 @@ export default function MobileConcept() {
             flex: 1;
         }
 
-        /* KARTY STYLIZOWANE JAK DESKTOP */
+        /* KARTY */
         .mobile-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -88,7 +95,6 @@ export default function MobileConcept() {
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
         }
 
-        /* Ikony w stylu desktop */
         .icon-box {
             width: 42px;
             height: 42px;
@@ -98,27 +104,32 @@ export default function MobileConcept() {
             display: flex;
             justify-content: center;
             align-items: center;
-            color: var(--accent-magenta); /* Domyślny kolor */
+            color: var(--accent-magenta);
         }
 
         /* Specjalne kolory dla ikon */
         .card-active .icon-box { color: var(--accent-green); border-color: rgba(74, 222, 128, 0.2); background: rgba(74, 222, 128, 0.1); }
-        .card-vip .icon-box { color: #fbbf24; border-color: rgba(251, 191, 36, 0.2); background: rgba(251, 191, 36, 0.1); }
+        .card-history .icon-box { color: #fff; }
         .card-stats .icon-box { color: var(--accent-purple); border-color: rgba(139, 92, 246, 0.2); background: rgba(139, 92, 246, 0.1); }
+        .card-yesterday .icon-box { color: #fbbf24; border-color: rgba(251, 191, 36, 0.2); background: rgba(251, 191, 36, 0.1); }
 
+        /* Kafelek Wyszukiwarki (Duży) */
         .card-search {
             grid-column: span 2;
-            min-height: 140px;
-            border-color: rgba(217, 70, 239, 0.3); /* Delikatny fioletowy border */
+            min-height: 160px; /* Nieco wyższy dla dłuższego tekstu */
+            border-color: rgba(217, 70, 239, 0.3);
             background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(217, 70, 239, 0.05));
         }
 
-        .card-wide {
+        /* Kafelek Nieaktywny (WIP) */
+        .card-wip {
             grid-column: span 2;
             flex-direction: row;
             align-items: center;
-            min-height: 90px;
-            height: 90px;
+            min-height: 80px;
+            height: 80px;
+            opacity: 0.5; /* Wyszarzenie */
+            border-style: dashed;
         }
 
         .card-top {
@@ -128,32 +139,26 @@ export default function MobileConcept() {
         }
 
         .card-content h2 {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: #fff;
-            margin: 16px 0 4px 0;
+            margin: 16px 0 6px 0;
+            line-height: 1.2;
         }
 
         .card-content p {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             margin: 0;
+            line-height: 1.4;
         }
 
         .card-label {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             color: #fff;
             margin-top: auto;
-        }
-
-        .badge-count {
-            background: var(--accent-green);
-            color: #000;
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 800;
+            line-height: 1.2;
         }
 
         .mobile-footer {
@@ -180,68 +185,81 @@ export default function MobileConcept() {
         
         {/* HEADER */}
         <div className="mobile-header">
-          <h1 className="brand-logo">BET.AI Pro</h1>
+          {/* Logo z Twoim gradientem i wielkimi literami */}
+          <h1 className="brand-logo">BET.AI <span className="highlight">PRO</span></h1>
           <div className="platform-badge">PC</div>
         </div>
 
         {/* BENTO GRID */}
         <div className="mobile-grid">
 
-          {/* 1. SZUKAJ */}
+          {/* 1. WYSZUKIWARKA (Duży) */}
           <div className="mobile-card card-search">
             <div className="card-top">
               <div className="icon-box"><Search size={22} /></div>
               <ArrowUpRight size={22} color="#52525b" />
             </div>
             <div className="card-content">
-              <h2>Szukaj Zespołu</h2>
-              <p>Analiza H2H, Historia, Statystyki</p>
+              <h2>Wyszukiwarka HT/FT</h2>
+              <p>Przeszukaj historyczne łamaki dla każdej drużyny. Archiwum ponad 57 tysięcy łamaków od 2015 roku.</p>
             </div>
           </div>
 
-          {/* 2. AKTYWNE */}
+          {/* 2. NASZE WYBRANE TYPY (Aktywne) */}
           <div className="mobile-card card-active">
             <div className="card-top">
               <div className="icon-box"><Flame size={22} /></div>
-              <span className="badge-count">12</span>
             </div>
-            <span className="card-label">Aktywne</span>
+            <div className="card-content">
+                <span className="card-label">Nasze wybrane Typy</span>
+                <p style={{fontSize: '0.75rem', marginTop: '4px'}}>Propozycje łamaków na najbliższe dni.</p>
+            </div>
           </div>
 
-          {/* 3. HISTORIA */}
-          <div className="mobile-card">
+          {/* 3. TRAFIONE TYPY (Historia) */}
+          <div className="mobile-card card-history">
             <div className="icon-box"><History size={22} /></div>
-            <span className="card-label">Historia</span>
+            <div className="card-content">
+                <span className="card-label">Trafione Typy</span>
+                <p style={{fontSize: '0.75rem', marginTop: '4px'}}>Sprawdź wszystkie nasze trafione typy.</p>
+            </div>
           </div>
 
           {/* 4. STATYSTYKI */}
           <div className="mobile-card card-stats">
             <div className="icon-box"><BarChart2 size={22} /></div>
-            <span className="card-label">Statystyki</span>
+            <div className="card-content">
+                <span className="card-label">Statystyki</span>
+                <p style={{fontSize: '0.75rem', marginTop: '4px'}}>Zobacz naszą skuteczność.</p>
+            </div>
           </div>
 
-          {/* 5. VIP */}
-          <div className="mobile-card card-vip">
-            <div className="icon-box"><Crown size={22} /></div>
-            <span className="card-label">VIP</span>
+          {/* 5. KTO WCZORAJ ZŁAMAŁ? (Nowy) */}
+          <div className="mobile-card card-yesterday">
+            <div className="icon-box"><CalendarDays size={22} /></div>
+             <div className="card-content">
+                <span className="card-label">Kto wczoraj złamał?</span>
+                <p style={{fontSize: '0.75rem', marginTop: '4px'}}>Wszystkie łamaki z dnia poprzedniego.</p>
+            </div>
           </div>
 
-          {/* 6. CENNIK */}
-          <div className="mobile-card card-wide">
+          {/* 6. WORK IN PROGRESS (Szeroki na dole, nieaktywny) */}
+          <div className="mobile-card card-wip">
             <div className="flex-row-content">
-              <div className="icon-box"><Tag size={22} /></div>
+              <div className="icon-box" style={{background: 'transparent', border: '1px solid #333', color: '#555'}}>
+                  <Construction size={22} />
+              </div>
               <div className="text-col">
-                <span className="card-label" style={{marginTop: 0}}>Cennik</span>
-                <span style={{fontSize: '0.8rem', color: 'var(--text-muted)'}}>Plany subskrypcji</span>
+                <span className="card-label" style={{marginTop: 0, color: '#555'}}>Work in Progress</span>
+                <span style={{fontSize: '0.75rem', color: '#444'}}>Coming soon...</span>
               </div>
             </div>
-            <ArrowUpRight size={22} color="#52525b" />
           </div>
 
         </div>
         
         <div className="mobile-footer">
-          <p>© 2025 BET.AI Pro Version</p>
+          <p>© 2025 BET.AI PRO Version</p>
         </div>
 
       </div>
