@@ -238,7 +238,7 @@ export default function MobileConcept() {
           <div className="mobile-card card-yesterday">
             <div className="icon-box"><CalendarDays size={22} /></div>
              <div className="card-content">
-                <div className="card-label">Kto wczoraj złamał?</div>
+                <div className="card-label">Najnowsze łamaki</div>
                 <div className="card-subtext">Wszystkie łamaki z dnia poprzedniego.</div>
             </div>
           </div>
