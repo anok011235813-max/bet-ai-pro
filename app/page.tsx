@@ -1,8 +1,8 @@
 import { createClient } from '@/utils/supabase';
 import DashboardGrid from './components/DashboardGrid';
-import MobileDashboard from './components/MobileDashboard'; // Importujemy nowy plik
+import MobileDashboard from './components/MobileDashboard';
 
-// === CZĘŚĆ LOGICZNA (BEZ ZMIAN) ===
+// === CZĘŚĆ LOGICZNA ===
 
 interface SuccessPick {
   id: number;
@@ -44,8 +44,21 @@ export default async function HomePage() {
 
   return (
     <>
+      {/* 
+          NAPRAWA UI: Wymuszamy ukrywanie za pomocą czystego CSS.
+          Tailwind czasem zawodzi przy konfiguracji ścieżek, to zadziała zawsze.
+      */}
+      <style>{`
+        @media (max-width: 768px) {
+          .desktop-view-force { display: none !important; }
+        }
+        @media (min-width: 769px) {
+          .mobile-view-force { display: none !important; }
+        }
+      `}</style>
+
       {/* WERSJA DESKTOP */}
-      <div className="hidden md:block main-page-wrapper">
+      <div className="desktop-view-force hidden md:block main-page-wrapper">
         <main className="container">
           <header style={{ marginBottom: '40px', width: '100%' }}>
             <h1 style={{ fontFamily: 'var(--font-space-grotesk)', fontSize: '2.5rem', fontWeight: 700, color: 'white', marginBottom: '8px' }}>
@@ -60,7 +73,7 @@ export default async function HomePage() {
       </div>
 
       {/* WERSJA MOBILE */}
-      <div className="md:hidden">
+      <div className="mobile-view-force md:hidden">
          <MobileDashboard />
       </div>
     </>
