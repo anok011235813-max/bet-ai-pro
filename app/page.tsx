@@ -2,6 +2,9 @@ import { createClient } from '@/utils/supabase';
 import DashboardGrid from './components/DashboardGrid';
 import MobileDashboard from './components/MobileDashboard';
 
+// WYMUSZAMY BRAK CACHE (Zawsze świeże dane)
+export const revalidate = 0;
+
 // === CZĘŚĆ LOGICZNA ===
 
 interface SuccessPick {
@@ -22,10 +25,17 @@ function parseDate(dateStr: string): Date {
 
 async function getSuccessPicks(): Promise<SuccessPick[]> {
   const supabase = createClient();
+  
+  // Pobieramy 10 najnowszych (po ID), żeby mieć pewność, że złapiemy ostatnio dodane
+  // Nawet jak mają starą datę meczu, to chcemy je widzieć, jeśli właśnie je dodałeś?
+  // Zazwyczaj sortuje się po dacie meczu. Sprawdźmy to:
+  
   const { data, error } = await supabase
     .from('tips')
     .select('id, gospodarz, gosc, wynik, data')
-    .ilike('kupon', 'Wygrany');
+    .ilike('kupon', 'Wygrany')
+    // Usuń limit w zapytaniu, posortujemy w JS
+    ;
 
   if (error) {
     console.error("Błąd pobierania danych:", error);
@@ -33,7 +43,11 @@ async function getSuccessPicks(): Promise<SuccessPick[]> {
   }
   
   if (!data) return [];
+
+  // Sortowanie po dacie meczu (od najnowszych)
   const sortedPicks = data.sort((a, b) => parseDate(b.data).getTime() - parseDate(a.data).getTime());
+  
+  // Bierzemy 3 pierwsze
   return sortedPicks.slice(0, 3);
 }
 
@@ -44,10 +58,6 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* 
-          NAPRAWA UI: Wymuszamy ukrywanie za pomocą czystego CSS.
-          Tailwind czasem zawodzi przy konfiguracji ścieżek, to zadziała zawsze.
-      */}
       <style>{`
         @media (max-width: 768px) {
           .desktop-view-force { display: none !important; }
