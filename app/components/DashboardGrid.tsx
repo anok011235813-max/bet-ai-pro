@@ -37,7 +37,7 @@ export default function DashboardGrid({ successPicks }: { successPicks: SuccessP
           <MockSearch />
         </Link>
         
-        <Link href="#" className="card card-h2h"> 
+        <Link href="/breaks" className="card card-h2h"> 
           <div className="card-header">
             <div className="icon-wrap" style={{ color: '#fbbf24', borderColor: 'rgba(251, 191, 36, 0.2)', background: 'rgba(251, 191, 36, 0.1)' }}>
               <CalendarDays />
