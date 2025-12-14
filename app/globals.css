@@ -612,3 +612,144 @@ body { background: linear-gradient(170deg, #020203 0%, #0a030a 30%, #240a25 80%)
   background: #e6c200;
   color: #000;
 }
+
+/* === KONCEPT MOBILNY (BENTO GRID) === */
+.mobile-concept-wrapper {
+    background-color: #000;
+    min-height: 100vh;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+}
+
+.mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.brand-logo {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.platform-badge {
+    width: 32px;
+    height: 32px;
+    background: #27272a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #a1a1aa;
+}
+
+.mobile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dwie kolumny */
+    gap: 12px;
+    flex: 1; /* Rozciągnij na wysokość */
+    margin-bottom: 16px;
+}
+
+.mobile-card {
+    background: #18181b;
+    border: 1px solid #27272a;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.2s;
+}
+
+.mobile-card:active {
+    background: #27272a;
+    transform: scale(0.98);
+}
+
+.card-search {
+    grid-column: span 2; /* Szeroki na górze */
+    min-height: 120px;
+}
+
+.card-wide {
+    grid-column: span 2; /* Szeroki na dole */
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.icon-box {
+    background: #27272a;
+    padding: 8px;
+    border-radius: 8px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-content h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f4f4f5;
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
+.card-content p {
+    font-size: 0.75rem;
+    color: #71717a;
+}
+
+.card-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #e4e4e7;
+    margin-top: 12px;
+}
+
+.card-label-bold {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #e4e4e7;
+    display: block;
+}
+
+.card-sub {
+    font-size: 0.75rem;
+    color: #71717a;
+}
+
+.badge-count {
+    background: rgba(74, 222, 128, 0.2);
+    color: #4ade80;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.flex-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mobile-footer {
+    text-align: center;
+    font-size: 0.65rem;
+    color: #52525b;
+}
