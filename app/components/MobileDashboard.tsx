@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { 
   Search, 
   Flame, 
-  History, 
+  CheckCircle2, // ZMIANA: Nowa ikona (taka jak na desktopie)
   BarChart2, 
   CalendarDays, 
   Construction 
@@ -208,8 +208,9 @@ export default function MobileDashboard() {
           </Link>
 
           <Link href="/history" className="card-link">
+            {/* ZMIANA: Używam CheckCircle2 zamiast History */}
             <div className="mobile-card card-history">
-              <div className="icon-box"><History size={22} /></div>
+              <div className="icon-box"><CheckCircle2 size={22} /></div>
               <div className="card-content">
                   <div className="card-label">Trafione Typy</div>
                   <div className="card-subtext">Sprawdź wszystkie nasze trafione typy.</div>
