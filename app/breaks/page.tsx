@@ -33,7 +33,8 @@ export default async function BreaksPage() {
   return (
     <div className="history-page-container">
       {/* HEADER (Styl z ActivePage) */}
-      <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+      {/* ZMIANA: Zwiększam maxWidth do 800px (to da więcej miejsca na Desktopie) */}
+      <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#fff', textDecoration: 'none', marginBottom: '30px', fontWeight: 500 }}>
             <ArrowLeft size={18} color="#d946ef" /> Wróć
         </Link>
@@ -49,7 +50,6 @@ export default async function BreaksPage() {
 
         {/* 
             LISTA MECZÓW - STYLIZACJA 1:1 Z TIPCARD 
-            Używamy tych samych klas co w TipCard, żeby zaciągnąć style z globals.css
         */}
         <div className="tip-card" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0 }}>
             <div className="history-section" style={{ borderTop: 'none', paddingTop: 0, marginTop: 0 }}>
@@ -67,7 +67,6 @@ export default async function BreaksPage() {
                                 <span className="history-match">
                                     <span>{match['home team']}</span>
                                     {' vs '}
-                                    {/* Zakładamy różowy kolor dla drugiego, lub po prostu pogrubienie - klasa team-in-focus robi robotę w Twoim CSS */}
                                     <span className="team-in-focus">{match['away team']}</span>
                                 </span>
                                 
