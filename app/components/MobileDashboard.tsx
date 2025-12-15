@@ -124,11 +124,10 @@ export default function MobileDashboard() {
             background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(217, 70, 239, 0.05)); 
         }
         
-        /* STYL DLA ZABLOKOWANEJ KARTY */
         .card-locked { 
             cursor: default !important; 
-            opacity: 0.6;
-            filter: grayscale(0.5);
+            opacity: 0.5;
+            filter: grayscale(1);
         }
         .card-locked:active { transform: none; }
 
@@ -179,14 +178,13 @@ export default function MobileDashboard() {
             </div>
           </Link>
 
-          {/* ZABLOKOWANY KAFELEK STATYSTYK */}
+          {/* ZMIENIONY KAFELEK STATYSTYK NA "WORK IN PROGRESS" */}
           <div className="mobile-card card-stats card-locked">
-            <div className="icon-box" style={{ borderColor: '#555', background: 'rgba(255,255,255,0.02)' }}>
-                <Lock size={22} color="#777" />
+            <div className="icon-box" style={{ background: 'transparent', border: '1px solid #555', color: '#777' }}>
+                <Lock size={22} />
             </div>
             <div className="card-content">
-              <div className="card-label" style={{ color: '#aaa' }}>Statystyki</div>
-              <div className="card-subtext">Sekcja w trakcie aktualizacji.</div>
+              <div className="card-label" style={{ color: '#777', marginBottom: 0 }}>Work in Progress</div>
             </div>
           </div>
 
