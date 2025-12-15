@@ -26,8 +26,9 @@ export default async function BreaksPage() {
 
   return (
     <div className="history-page-container">
-      <Link href="/" className="back-link">
-        <ArrowLeft size={18} color="#d946ef" /> Wróć
+      <div style={{ padding: '20px', maxWidth: '900px', margin: '0 auto' }}>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#fff', textDecoration: 'none', marginBottom: '30px', fontWeight: 500 }}>
+            <ArrowLeft size={18} color="#d946ef" /> Wróć
         </Link>
         
         <header style={{ textAlign: 'center', marginBottom: '30px' }}>
