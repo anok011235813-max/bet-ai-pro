@@ -81,7 +81,7 @@ export default async function BreaksPage() {
       </div>
 
       <style>{`
-        /* MOBILE FIRST */
+        /* MOBILE FIRST (Baza) */
         .history-item {
             display: flex !important;
             flex-direction: column !important;
@@ -130,6 +130,8 @@ export default async function BreaksPage() {
                 width: 100% !important; 
                 margin-left: 0 !important;
                 justify-content: flex-start !important;
+                padding-left: 20px !important; /* Większy padding z lewej */
+                padding-right: 20px !important;
             }
 
             .meta-row {
@@ -137,27 +139,38 @@ export default async function BreaksPage() {
                 justify-content: flex-start;
                 gap: 0; 
                 margin: 0;
-                font-size: 0.9rem !important; /* CZCIONKA 0.9 NA DESKTOP */
+                font-size: 0.9rem !important;
+                color: #a1a1aa !important;
+                flex: 0 0 auto; /* Nie rozciągaj się */
             }
 
+            /* POPRAWA SEPARATORA - WIĘKSZE ODSTĘPY I JEDNA LINIA */
             .desktop-separator { 
                 display: inline-block; 
                 color: #3f3f46; 
-                margin: 0 10px; 
+                margin: 0 16px; /* Zwiększony odstęp poziomy (było 10px) */
+                font-weight: 300;
             }
             
             .meta-country, .meta-league, .meta-date {
                 text-align: left;
                 font-size: 0.9rem !important;
+                color: #a1a1aa !important;
             }
 
             /* Mecz i Wynik */
             .match-row {
                 flex: 1; 
                 justify-content: space-between;
+                margin-left: 0; /* Reset marginesu, separator załatwia sprawę */
             }
             
-            .history-match, .history-score {
+            .history-match {
+                 font-size: 0.9rem !important;
+                 color: #fff !important;
+            }
+            
+            .history-score {
                  font-size: 0.9rem !important;
             }
         }
