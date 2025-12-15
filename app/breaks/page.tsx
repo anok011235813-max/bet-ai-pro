@@ -97,7 +97,7 @@ export default async function BreaksPage() {
             display: flex;
             justify-content: space-between; 
             width: 100%;
-            font-size: 0.75rem; /* Mobile: mniejsza czcionka dla metadanych */
+            font-size: 0.75rem; 
             color: #a1a1aa; 
         }
 
@@ -112,3 +112,56 @@ export default async function BreaksPage() {
 
         .history-match {
             margin: 0 !important;
+            font-size: 0.9rem;
+            color: #fff;
+        }
+
+        .history-score {
+            font-size: 0.9rem;
+            color: #d946ef;
+        }
+
+        /* --- DESKTOP (od 768px) --- */
+        @media (min-width: 768px) {
+            .history-item {
+                flex-direction: row !important;
+                align-items: center !important;
+                gap: 0 !important; 
+                width: 100% !important; 
+                margin-left: 0 !important;
+                justify-content: flex-start !important;
+            }
+
+            .meta-row {
+                width: auto;
+                justify-content: flex-start;
+                gap: 0; 
+                margin: 0;
+                font-size: 0.9rem !important; /* CZCIONKA 0.9 NA DESKTOP */
+            }
+
+            .desktop-separator { 
+                display: inline-block; 
+                color: #3f3f46; 
+                margin: 0 10px; 
+            }
+            
+            .meta-country, .meta-league, .meta-date {
+                text-align: left;
+                font-size: 0.9rem !important;
+            }
+
+            /* Mecz i Wynik */
+            .match-row {
+                flex: 1; 
+                justify-content: space-between;
+            }
+            
+            .history-match, .history-score {
+                 font-size: 0.9rem !important;
+            }
+        }
+      `}</style>
+    </div>
+  );
+}
