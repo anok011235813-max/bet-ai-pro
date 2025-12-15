@@ -27,11 +27,13 @@ export default async function BreaksPage() {
   return (
     <div className="history-page-container">
       <div style={{ padding: '20px', maxWidth: '900px', margin: '0 auto' }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#fff', textDecoration: 'none', marginBottom: '30px', fontWeight: 500 }}>
+        
+        {/* TWÓJ WYMAGANY RETURN DLA LINKU */}
+        <Link href="/" className="back-link">
             <ArrowLeft size={18} color="#d946ef" /> Wróć
         </Link>
         
-        <header style={{ textAlign: 'center', marginBottom: '30px' }}>
+        <header style={{ textAlign: 'center', marginBottom: '30px', marginTop: '20px' }}>
             <h1 style={{ fontSize: '2rem', fontWeight: 700, color: '#d946ef', marginBottom: '5px' }}>Najnowsze łamaki</h1>
             <p style={{ color: '#a1a1aa', fontSize: '0.9rem' }}>{date ? `Z dnia: ${date}` : 'Brak danych'}</p>
         </header>
@@ -52,7 +54,6 @@ export default async function BreaksPage() {
                                     <span className="desktop-separator"> | </span>
                                     <span>{match['Competition']}</span>
                                     
-                                    {/* Trzeci separator (szary) - ten zostaje */}
                                     <span className="desktop-separator"> | </span>
                                 </div>
 
@@ -82,6 +83,17 @@ export default async function BreaksPage() {
         .history-match::before {
             content: none !important;
             display: none !important;
+        }
+
+        /* STYL DLA PRZYCISKU POWROTU */
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            width: fit-content;
         }
 
         .history-item {
