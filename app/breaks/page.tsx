@@ -52,7 +52,7 @@ export default async function BreaksPage() {
                                     <span className="desktop-separator"> | </span>
                                     <span>{match['Competition']}</span>
                                     
-                                    {/* PRZENIESIONY SEPARATOR DO ŚRODKA - TERAZ BĘDZIE POJEDYNCZY I RÓWNY */}
+                                    {/* Trzeci separator (szary) - ten zostaje */}
                                     <span className="desktop-separator"> | </span>
                                 </div>
 
@@ -78,6 +78,12 @@ export default async function BreaksPage() {
       </div>
 
       <style>{`
+        /* FIX: USUNIĘCIE BIAŁEGO SEPARATORA Z GLOBALS */
+        .history-match::before {
+            content: none !important;
+            display: none !important;
+        }
+
         .history-item {
             display: flex !important;
             flex-direction: column !important;
@@ -130,7 +136,6 @@ export default async function BreaksPage() {
                 color: #a1a1aa !important;
             }
 
-            /* POPRAWIONY MARGINES (ZMNIEJSZONY do 10px) */
             .desktop-separator { 
                 display: inline; 
                 color: #3f3f46; 
