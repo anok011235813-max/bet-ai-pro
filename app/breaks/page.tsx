@@ -26,7 +26,7 @@ export default async function BreaksPage() {
 
   return (
     <div className="history-page-container">
-      {/* HEADER: MaxWidth 900px */}
+      {/* HEADER */}
       <div style={{ padding: '20px', maxWidth: '900px', margin: '0 auto' }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#fff', textDecoration: 'none', marginBottom: '30px', fontWeight: 500 }}>
             <ArrowLeft size={18} color="#d946ef" /> Wróć
@@ -44,21 +44,16 @@ export default async function BreaksPage() {
                         {breaks.map((match: any) => (
                             <li key={match.id} className="history-item">
                                 
-                                {/* WIERSZ 1: Metadane */}
+                                {/* 
+                                    CZYSTY KOD HTML BEZ KRESEK "|"
+                                    Kreski dodajemy w CSS (::after) - to zapobiega dublowaniu.
+                                */}
                                 <div className="meta-row">
-                                    <span>{match['Date']}</span>
-                                    <span className="desktop-separator"> | </span>
-                                    
-                                    <span className="meta-country">{match['Country/Continent']}</span>
-                                    
-                                    <span className="desktop-separator"> | </span>
-                                    <span>{match['Competition']}</span>
+                                    <span className="data-col">{match['Date']}</span>
+                                    <span className="country-col">{match['Country/Continent']}</span>
+                                    <span className="league-col">{match['Competition']}</span>
                                 </div>
-                                
-                                {/* SEPARATOR PRZED MECZEM (Widoczny tylko na Desktop) */}
-                                <span className="desktop-separator"> | </span>
 
-                                {/* WIERSZ 2: Mecz i Wynik */}
                                 <div className="match-row">
                                     <span className="history-match">
                                         <span>{match['home team']}</span>
@@ -81,7 +76,7 @@ export default async function BreaksPage() {
       </div>
 
       <style>{`
-        /* MOBILE FIRST (Baza) */
+        /* MOBILE FIRST */
         .history-item {
             display: flex !important;
             flex-direction: column !important;
@@ -91,8 +86,6 @@ export default async function BreaksPage() {
             margin-left: -5% !important;
         }
 
-        .desktop-separator { display: none; }
-
         .meta-row {
             display: flex;
             justify-content: space-between; 
@@ -101,7 +94,7 @@ export default async function BreaksPage() {
             color: #a1a1aa; 
         }
 
-        .meta-country { text-align: center; flex: 1; }
+        .country-col { text-align: center; flex: 1; }
 
         .match-row {
             display: flex;
@@ -110,16 +103,8 @@ export default async function BreaksPage() {
             width: 100%;
         }
 
-        .history-match {
-            margin: 0 !important;
-            font-size: 0.9rem;
-            color: #fff;
-        }
-
-        .history-score {
-            font-size: 0.9rem;
-            color: #d946ef;
-        }
+        .history-match { margin: 0 !important; font-size: 0.9rem; color: #fff; }
+        .history-score { font-size: 0.9rem; color: #d946ef; }
 
         /* --- DESKTOP (od 768px) --- */
         @media (min-width: 768px) {
@@ -130,8 +115,8 @@ export default async function BreaksPage() {
                 width: 100% !important; 
                 margin-left: 0 !important;
                 justify-content: flex-start !important;
-                padding-left: 12px !important; /* Przywrócony mniejszy padding */
-                padding-right: 12px !important;
+                padding-left: 15px !important;
+                padding-right: 15px !important;
             }
 
             .meta-row {
@@ -141,22 +126,26 @@ export default async function BreaksPage() {
                 margin: 0;
                 font-size: 0.9rem !important;
                 color: #a1a1aa !important;
-                flex: 0 0 auto; 
-            }
-
-            /* SEPARATOR - Zmniejszone marginesy (10px), bez inline-block żeby nie robić podwójnych kresek */
-            .desktop-separator { 
-                display: inline; 
-                color: #3f3f46; 
-                margin: 0 10px; /* Klasyczne 10px */
             }
             
-            .meta-country, .meta-league, .meta-date {
+            .country-col, .league-col, .data-col {
                 text-align: left;
                 font-size: 0.9rem !important;
                 color: #a1a1aa !important;
             }
 
+            /* === TU JEST MAGIA SEPARATORÓW === */
+            /* Dodajemy kreskę PO każdym elemencie: Data, Kraj, Liga */
+            .data-col::after, 
+            .country-col::after, 
+            .league-col::after {
+                content: "|";
+                display: inline-block;
+                color: #3f3f46;
+                margin: 0 10px; /* MAŁY ODSTĘP */
+                font-weight: 300;
+            }
+            
             /* Mecz i Wynik */
             .match-row {
                 flex: 1; 
@@ -164,14 +153,8 @@ export default async function BreaksPage() {
                 margin-left: 0; 
             }
             
-            .history-match {
-                 font-size: 0.9rem !important;
-                 color: #fff !important;
-            }
-            
-            .history-score {
-                 font-size: 0.9rem !important;
-            }
+            .history-match { font-size: 0.9rem !important; color: #fff !important; }
+            .history-score { font-size: 0.9rem !important; }
         }
       `}</style>
     </div>
