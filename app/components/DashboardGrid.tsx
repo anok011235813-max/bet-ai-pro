@@ -10,10 +10,10 @@ import {
   CalendarDays,
   Flame
 } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import VipLoginModal from './VipLoginModal';
 
-// ... (MockSearch i AnimatedChart bez zmian - skróciłem dla czytelności)
+// ... (MockSearch i AnimatedChart)
 function MockSearch() { return <div style={{marginTop:'auto',background:'rgba(0,0,0,0.3)',border:'1px solid rgba(255,255,255,0.08)',padding:'12px 16px',borderRadius:'12px',display:'flex',alignItems:'center',gap:'12px',color:'#777'}}><Search size={16}/><span>Szukaj drużyny...</span></div> }
 function AnimatedChart() { return <div className="stats-chart-container"><div className="stats-chart-bar" style={{height:'40%'}}/></div> }
 
@@ -63,13 +63,25 @@ export default function DashboardGrid({ successPicks }: { successPicks: SuccessP
           <div className="card-footer"><div className="arrow-btn"><Lock size={20} style={{ color: '#FFD700' }} /></div></div>
         </div>
         
-        <Link href="/stats" className="card card-stats">
-          <div className="card-header"><div className="icon-wrap"><BarChart3 /></div></div>
-          <div><h3>Statystyki</h3><p>Zobacz naszą skuteczność i kluczowe wskaźniki.</p></div>
-          <AnimatedChart />
-        </Link>
+        {/* ZABLOKOWANY KAFELEK STATYSTYK */}
+        <div className="card card-stats" style={{ cursor: 'default', opacity: 0.6 }}>
+          <div className="card-header">
+            <div className="icon-wrap" style={{ color: '#aaa', borderColor: 'rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)' }}>
+                <BarChart3 />
+            </div>
+          </div>
+          <div>
+            <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                Statystyki <Lock size={14} color="#777" />
+            </h3>
+            <p>Sekcja w trakcie aktualizacji.</p>
+          </div>
+          {/* AnimatedChart usunięty lub wyszarzony */}
+          <div className="stats-chart-container" style={{ opacity: 0.3 }}>
+            <div className="stats-chart-bar" style={{ height:'40%', background: '#555' }}/>
+          </div>
+        </div>
         
-        {/* ZMIANA: ZIELONA IKONA DLA TRAFIONYCH TYPÓW */}
         <Link href="/history" className="card card-history">
           <div className="card-header">
              <div className="icon-wrap" style={{ color: '#4ade80', borderColor: 'rgba(74, 222, 128, 0.2)', background: 'rgba(74, 222, 128, 0.1)' }}>
