@@ -26,7 +26,7 @@ export default async function BreaksPage() {
 
   return (
     <div className="history-page-container">
-      {/* HEADER: MaxWidth 900px (Desktop +10%) */}
+      {/* HEADER: MaxWidth 900px */}
       <div style={{ padding: '20px', maxWidth: '900px', margin: '0 auto' }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#fff', textDecoration: 'none', marginBottom: '30px', fontWeight: 500 }}>
             <ArrowLeft size={18} color="#d946ef" /> Wróć
@@ -44,25 +44,21 @@ export default async function BreaksPage() {
                         {breaks.map((match: any) => (
                             <li key={match.id} className="history-item">
                                 
-                                {/* 
-                                   WIERSZ 1 (MOBILE): DATA - KRAJ - LIGA 
-                                   Na Desktopie to się połączy w linię z separatorami |
-                                */}
+                                {/* WIERSZ 1 (MOBILE): DATA - KRAJ - LIGA */}
                                 <div className="meta-row">
                                     <span>{match['Date']}</span>
                                     <span className="desktop-separator"> | </span>
                                     
-                                    {/* KRAJ (Wtopiony w tłum, ten sam kolor co reszta) */}
                                     <span className="meta-country">{match['Country/Continent']}</span>
                                     
                                     <span className="desktop-separator"> | </span>
                                     <span>{match['Competition']}</span>
                                 </div>
+
+                                {/* SEPARATOR PRZED MECZEM (Tylko Desktop) */}
+                                <span className="desktop-separator match-separator"> | </span>
                                 
-                                {/* 
-                                   WIERSZ 2 (MOBILE): MECZ ..... WYNIK 
-                                   Na Desktopie doklei się do końca linii
-                                */}
+                                {/* WIERSZ 2 (MOBILE): MECZ ... WYNIK */}
                                 <div className="match-row">
                                     <span className="history-match">
                                         <span>{match['home team']}</span>
@@ -70,7 +66,6 @@ export default async function BreaksPage() {
                                         <span>{match['away team']}</span>
                                     </span>
                                     
-                                    {/* WYNIK - W tej samej linii co mecz, po prawej */}
                                     <strong className="history-score">
                                         {match['ft result']} ({match['ht result']})
                                     </strong>
@@ -92,30 +87,22 @@ export default async function BreaksPage() {
             flex-direction: column !important;
             gap: 8px !important;
             padding: 12px 14px !important; 
-            
-            /* MOBILE: Rozszerzenie paska o 10% */
             width: 110% !important; 
             margin-left: -5% !important;
         }
 
-        /* Wiersz 1: Metadane */
-        .meta-row {
-            display: flex;
-            justify-content: space-between; /* Lewo - Środek - Prawo */
-            width: 100%;
-            font-size: 0.75rem;
-            color: #a1a1aa; /* Szary, wtopiony w tłum */
-        }
-        
-        /* Ukrywamy separatory na mobile */
         .desktop-separator { display: none; }
 
-        .meta-country {
-            text-align: center;
-            flex: 1; /* Żeby się wyśrodkował */
+        .meta-row {
+            display: flex;
+            justify-content: space-between; 
+            width: 100%;
+            font-size: 0.75rem; /* Mobile: mniejsza czcionka dla metadanych */
+            color: #a1a1aa; 
         }
 
-        /* Wiersz 2: Mecz i Wynik */
+        .meta-country { text-align: center; flex: 1; }
+
         .match-row {
             display: flex;
             justify-content: space-between;
@@ -125,49 +112,3 @@ export default async function BreaksPage() {
 
         .history-match {
             margin: 0 !important;
-            font-size: 0.9rem;
-            color: #fff;
-        }
-
-        .history-score {
-            font-size: 0.9rem;
-            color: #d946ef;
-        }
-
-        /* --- DESKTOP (od 768px) --- */
-        @media (min-width: 768px) {
-            .history-item {
-                flex-direction: row !important;
-                align-items: center !important;
-                gap: 0 !important;
-                width: 100% !important; /* Reset szerokości */
-                margin-left: 0 !important;
-                justify-content: flex-start !important;
-            }
-
-            /* Metadane w jednej linii na początku */
-            .meta-row {
-                width: auto;
-                justify-content: flex-start;
-                gap: 8px;
-                margin-right: 20px;
-                flex: 0 0 auto; /* Nie rozciągaj się */
-            }
-
-            .desktop-separator { display: inline; color: #3f3f46; }
-
-            .meta-country {
-                text-align: left;
-                flex: initial;
-            }
-
-            /* Mecz i Wynik */
-            .match-row {
-                flex: 1;
-                justify-content: space-between;
-            }
-        }
-      `}</style>
-    </div>
-  );
-}
