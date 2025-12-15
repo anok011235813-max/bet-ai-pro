@@ -54,7 +54,6 @@ export default function StatisticsPage() {
       
       <Link href="/" className="back-link" style={{ marginBottom: '2rem', display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', textDecoration: 'none' }}>
         <ArrowLeft size={18} color="#d946ef" /> Wróć
-        Wróć
       </Link>
 
       <header style={{ textAlign: 'center', marginBottom: '3rem' }}>
