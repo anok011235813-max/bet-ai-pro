@@ -44,7 +44,7 @@ export default async function BreaksPage() {
                         {breaks.map((match: any) => (
                             <li key={match.id} className="history-item">
                                 
-                                {/* WIERSZ 1 (MOBILE): DATA - KRAJ - LIGA */}
+                                {/* WIERSZ 1: Metadane */}
                                 <div className="meta-row">
                                     <span>{match['Date']}</span>
                                     <span className="desktop-separator"> | </span>
@@ -54,11 +54,11 @@ export default async function BreaksPage() {
                                     <span className="desktop-separator"> | </span>
                                     <span>{match['Competition']}</span>
                                 </div>
-
-                                {/* SEPARATOR PRZED MECZEM (Tylko Desktop) */}
-                                <span className="desktop-separator match-separator"> | </span>
                                 
-                                {/* WIERSZ 2 (MOBILE): MECZ ... WYNIK */}
+                                {/* SEPARATOR PRZED MECZEM (Widoczny tylko na Desktop) */}
+                                <span className="desktop-separator"> | </span>
+
+                                {/* WIERSZ 2: Mecz i Wynik */}
                                 <div className="match-row">
                                     <span className="history-match">
                                         <span>{match['home team']}</span>
@@ -130,8 +130,8 @@ export default async function BreaksPage() {
                 width: 100% !important; 
                 margin-left: 0 !important;
                 justify-content: flex-start !important;
-                padding-left: 20px !important; /* Większy padding z lewej */
-                padding-right: 20px !important;
+                padding-left: 12px !important; /* Przywrócony mniejszy padding */
+                padding-right: 12px !important;
             }
 
             .meta-row {
@@ -141,15 +141,14 @@ export default async function BreaksPage() {
                 margin: 0;
                 font-size: 0.9rem !important;
                 color: #a1a1aa !important;
-                flex: 0 0 auto; /* Nie rozciągaj się */
+                flex: 0 0 auto; 
             }
 
-            /* POPRAWA SEPARATORA - WIĘKSZE ODSTĘPY I JEDNA LINIA */
+            /* SEPARATOR - Zmniejszone marginesy (10px), bez inline-block żeby nie robić podwójnych kresek */
             .desktop-separator { 
-                display: inline-block; 
+                display: inline; 
                 color: #3f3f46; 
-                margin: 0 16px; /* Zwiększony odstęp poziomy (było 10px) */
-                font-weight: 300;
+                margin: 0 10px; /* Klasyczne 10px */
             }
             
             .meta-country, .meta-league, .meta-date {
@@ -162,7 +161,7 @@ export default async function BreaksPage() {
             .match-row {
                 flex: 1; 
                 justify-content: space-between;
-                margin-left: 0; /* Reset marginesu, separator załatwia sprawę */
+                margin-left: 0; 
             }
             
             .history-match {
