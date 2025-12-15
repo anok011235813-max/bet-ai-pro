@@ -53,12 +53,12 @@ export default function StatisticsPage() {
     <div className="history-page-container"> {/* Używamy Twojej klasy kontenera */}
       
       <Link href="/" className="back-link" style={{ marginBottom: '2rem', display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', textDecoration: 'none' }}>
-        <ArrowLeft size={20} />
-        Wróć do strony głównej
+        <ArrowLeft size={18} color="#d946ef" /> Wróć
+        Wróć
       </Link>
 
       <header style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '0.5rem', fontFamily: 'var(--font-heading)' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '0.5rem', fontFamily: 'var(--font-heading)' }}>
           Statystyki <span style={{ color: 'var(--accent-magenta)' }}>Listopad</span>
         </h1>
         <p style={{ color: 'var(--text-muted)' }}>

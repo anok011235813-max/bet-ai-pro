@@ -7,7 +7,7 @@ export default function SearchPage() {
   return (
     <div className="search-page-container">
       <Link href="/" className="back-link">
-        <ArrowLeft size={16} /> Wróć do panelu
+        <ArrowLeft size={18} color="#d946ef" /> Wróć
       </Link>
       
       <header style={{ textAlign: 'center', marginBottom: '40px' }}>
