@@ -8,7 +8,6 @@ export const revalidate = 0;
 async function getLatestBreaks() {
   const supabase = createClient();
   
-  // Pobieramy paczkę ostatnich, żeby znaleźć najnowszą datę
   const { data: latestData, error } = await supabase
     .from('team_breaks')
     .select('*')
@@ -19,7 +18,6 @@ async function getLatestBreaks() {
     return { date: null, breaks: [] };
   }
 
-  // Bierzemy datę z pierwszego rekordu i filtrujemy resztę
   const lastEntry = latestData[0];
   const targetDate = lastEntry['Date'];
   const breaksFromLastDay = latestData.filter((item: any) => item['Date'] === targetDate);
@@ -32,8 +30,7 @@ export default async function BreaksPage() {
 
   return (
     <div className="history-page-container">
-      {/* HEADER (Styl z ActivePage) */}
-      {/* ZMIANA: Zwiększam maxWidth do 800px (to da więcej miejsca na Desktopie) */}
+      {/* HEADER (Szerokość 800px dla desktopu) */}
       <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#fff', textDecoration: 'none', marginBottom: '30px', fontWeight: 500 }}>
             <ArrowLeft size={18} color="#d946ef" /> Wróć
@@ -48,9 +45,7 @@ export default async function BreaksPage() {
             </p>
         </header>
 
-        {/* 
-            LISTA MECZÓW - STYLIZACJA 1:1 Z TIPCARD 
-        */}
+        {/* LISTA MECZÓW */}
         <div className="tip-card" style={{ background: 'transparent', border: 'none', boxShadow: 'none', padding: 0 }}>
             <div className="history-section" style={{ borderTop: 'none', paddingTop: 0, marginTop: 0 }}>
                 {breaks.length > 0 ? (
@@ -63,14 +58,14 @@ export default async function BreaksPage() {
                                 {/* LIGA */}
                                 <span className="history-league">{match['Competition']}</span>
                                 
-                                {/* MECZ (Gospodarz vs Gość) */}
+                                {/* MECZ (Gospodarz vs Gość) - TERAZ OBA W JEDNYM KOLORZE (neutralnym) */}
                                 <span className="history-match">
                                     <span>{match['home team']}</span>
                                     {' vs '}
-                                    <span className="team-in-focus">{match['away team']}</span>
+                                    <span>{match['away team']}</span> {/* Usunięto 'team-in-focus' */}
                                 </span>
                                 
-                                {/* WYNIK (FT + HT) */}
+                                {/* WYNIK (FT + HT) - Pozostaje kolorowy (klasa .history-score w CSS to załatwia) */}
                                 <strong className="history-score">
                                     {match['ft result']} ({match['ht result']})
                                 </strong>
